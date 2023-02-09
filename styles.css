@@ -16,20 +16,21 @@
     font-weight: normal;
 }
 
+button,
+input {
+    border: none;
+    outline: none;
+    background: none;
+    color: inherit;
+}
+
 button {
     cursor: pointer;
+    background-color: var(--red);
 }
   
 input {
     -webkit-appearance: none;
-}
-  
-button,
-input {
-    border: none;
-    background: none;
-    outline: none;
-    color: inherit;
 }
   
 img {
