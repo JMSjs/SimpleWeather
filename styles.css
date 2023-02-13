@@ -27,6 +27,8 @@ input {
 button {
     cursor: pointer;
     background-color: var(--red);
+    padding: .10em;
+    border-radius: .5em;
 }
   
 input {
@@ -61,6 +63,6 @@ body {
     padding: 20px;
     border: 1px solid var(--text_med);
     border-radius: 10px;
-    background-color: white;
+    background-color: var(--text_light);
     color: var(--text_dark);
 }

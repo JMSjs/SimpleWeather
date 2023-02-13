@@ -32,15 +32,6 @@ searchForm.addEventListener('submit', e => {
     locateCity();
 });
 
-const displayCity = document.querySelector('.city');
-const displayTemp = document.querySelector('.temperature');
-const displayIcon = document.querySelector('.icon');
-const displayDesc = document.querySelector('.description');
-
-
-
-
-
 const loadLocalWeather = async () => {
     try {
         const res = await fetch(apiEndPoint + "lat=" + latitude + "&lon=" + longitude + "&appid=" + apiKEY);
@@ -69,6 +60,7 @@ const loadLocalWeather = async () => {
         card.appendChild(displayDesc);
         
         weatherSection.appendChild(card);
+        searchTerm.value = "";
 
         console.log(`The current weather in ${data.name}, ${data.sys.country} is ${data.weather[0].main}, and feels like ${tempFahrenheit}\u00B0 F.`);
     } catch (err) {
