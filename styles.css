@@ -50,6 +50,17 @@ body {
     padding: 50px;
 }
   
-.weatherCard {
-    border-radius: ;
+.weatherSection {
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid var(--text_med);
+    border-radius: 10px;
+    background-color: white;
+    color: var(--text_dark);
 }

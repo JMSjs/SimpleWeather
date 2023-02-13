@@ -22,7 +22,7 @@ searchForm.addEventListener('submit', e => {
             cityName = data[0].name;
             state = data[0].state;
             country = data[0].country;
-            console.log(latitude, longitude, state, country);
+            console.log(latitude, longitude, cityName, state, country);
             loadLocalWeather();
         } catch (err) {
             console.log ("Error at locating search term!!", err);
@@ -47,9 +47,29 @@ const loadLocalWeather = async () => {
         const data = await res.json();
         let tempFahrenheit = Math.round((data.main.temp - 273.15) * 9/5 + 32);
         const weatherSection = document.querySelector('.weatherSection');
-        const iconImg = document.createElement('img');
-        iconImg.src = `https://openweathermap.org/img/wn/${data.weather[0]["icon"]}@2x.png`;
-        weatherSection.appendChild(iconImg);
+
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        const displayLocation = document.createElement('h3');
+        displayLocation.innerText = cityName;
+
+        const displayTemp = document.createElement('h1');
+        displayTemp.innerText = `${tempFahrenheit}\u00B0 F`;
+        
+        const displayImg = document.createElement('img');
+        displayImg.src = `https://openweathermap.org/img/wn/${data.weather[0]["icon"]}@2x.png`;
+        
+        const displayDesc = document.createElement('h4');
+        displayDesc.innerText = data.weather[0].description;
+
+        card.appendChild(displayLocation);
+        card.appendChild(displayTemp);
+        card.appendChild(displayImg);
+        card.appendChild(displayDesc);
+        
+        weatherSection.appendChild(card);
+
         console.log(`The current weather in ${data.name}, ${data.sys.country} is ${data.weather[0].main}, and feels like ${tempFahrenheit}\u00B0 F.`);
     } catch (err) {
         console.log ("Error fetching weather data!", err)
