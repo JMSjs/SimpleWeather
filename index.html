@@ -9,10 +9,21 @@
 </head>
 <body>
     <h1>Simple Weather App</h1>
-    <form>
-        <input type="text" placeholder="Search for a city">
-        <button id="submit">Search</button>
-    </form>
+    <header>
+        <form>
+            <input type="text" placeholder="Search for a city">
+            <button id="submit">Search</button>
+        </form>
+        <div class="dropdown">
+            <label for="select-unit">Select a unit:</label>
+            <select name="units" id="select-unit" onchange="changeUnit()">
+                <option value="metric">Metric (Celsius)</option>
+                <option value="imperial">Imperial (Fahrenheit)</option>
+                <option value="standard">Standard (Kelvin)</option>
+            </select>
+        </div>
+    </header>
+
 
     <section class="weatherSection"></section>
     

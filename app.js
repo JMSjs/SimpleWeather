@@ -7,6 +7,16 @@ let cityName = "";
 let state = "";
 let country = "";
 
+const selectDropDown = document.querySelector('select');
+let selectedUnit = selectDropDown.value;
+let displayUnit = selectedUnit;
+
+
+changeUnit = () => {
+    selectedUnit = selectDropDown.value;
+    console.log(selectedUnit);
+};
+
 const searchForm = document.querySelector('form');
 const searchTerm = document.querySelector('input');
 searchForm.addEventListener('submit', e => {
@@ -34,9 +44,9 @@ searchForm.addEventListener('submit', e => {
 
 const loadLocalWeather = async () => {
     try {
-        const res = await fetch(apiEndPoint + "lat=" + latitude + "&lon=" + longitude + "&appid=" + apiKEY);
+        const res = await fetch(apiEndPoint + "lat=" + latitude + "&lon=" + longitude + "&units=" + selectedUnit + "&appid=" + apiKEY);
         const data = await res.json();
-        let tempFahrenheit = Math.round((data.main.temp - 273.15) * 9/5 + 32);
+        let temp = Math.round(data.main.temp);
         const weatherSection = document.querySelector('.weatherSection');
 
         const card = document.createElement('div');
@@ -45,8 +55,20 @@ const loadLocalWeather = async () => {
         const displayLocation = document.createElement('h3');
         displayLocation.innerText = cityName;
 
+        switch(selectedUnit) {
+            case "metric": 
+                displayUnit = "\u00B0 C";
+                break;
+            case "imperial": 
+                displayUnit = "\u00B0 F";
+                break;
+            case "standard": 
+                displayUnit = "K";
+                break;
+        }
+
         const displayTemp = document.createElement('h1');
-        displayTemp.innerText = `${tempFahrenheit}\u00B0 F`;
+        displayTemp.innerText = `${temp} ${displayUnit}`;
         
         const displayImg = document.createElement('img');
         displayImg.src = `https://openweathermap.org/img/wn/${data.weather[0]["icon"]}@2x.png`;
@@ -62,7 +84,7 @@ const loadLocalWeather = async () => {
         weatherSection.appendChild(card);
         searchTerm.value = "";
 
-        console.log(`The current weather in ${data.name}, ${data.sys.country} is ${data.weather[0].main}, and feels like ${tempFahrenheit}\u00B0 F.`);
+        console.log(`The current weather in ${data.name}, ${data.sys.country} is ${data.weather[0].main}, and feels like ${temp}\u00B0 F.`);
     } catch (err) {
         console.log ("Error fetching weather data!", err)
     }
