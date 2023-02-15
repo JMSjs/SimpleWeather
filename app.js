@@ -63,12 +63,12 @@ const loadLocalWeather = async () => {
                 displayUnit = "\u00B0 F";
                 break;
             case "standard": 
-                displayUnit = "K";
+                displayUnit = " K";
                 break;
         }
 
         const displayTemp = document.createElement('h1');
-        displayTemp.innerText = `${temp} ${displayUnit}`;
+        displayTemp.innerText = temp + displayUnit;
         
         const displayImg = document.createElement('img');
         displayImg.src = `https://openweathermap.org/img/wn/${data.weather[0]["icon"]}@2x.png`;
